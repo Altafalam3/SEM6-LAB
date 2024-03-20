@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Form Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div ng-controller="FormController as formCtrl">
+    <form name="userForm" ng-submit="formCtrl.submitForm()" novalidate>
+        <label>Name:</label>
+        <input type="text" name="name" ng-model="formCtrl.user.name" required ng-pattern="/^[^\d]+$/">
+        <div class="error" ng-show="userForm.name.$dirty && (userForm.name.$error.required || userForm.name.$error.pattern)">
+            <span ng-show="userForm.name.$error.required">Name is required.</span>
+            <span ng-show="userForm.name.$error.pattern">Name should not contain numbers.</span>
+        </div>
+
+        <label>Roll No:</label>
+        <input type="text" name="rollNo" ng-model="formCtrl.user.rollNo" ng-pattern="/^\d+$/" required>
+        <div class="error" ng-show="userForm.rollNo.$dirty && userForm.rollNo.$error.required">
+            Roll No is required.
+        </div>
+        <div class="error" ng-show="userForm.rollNo.$dirty && userForm.rollNo.$error.pattern">
+            Roll No must be numeric.
+        </div>
+
+        <label>Email:</label>
+        <input type="email" name="email" ng-model="formCtrl.user.email" required>
+        <div class="error" ng-show="userForm.email.$dirty && (userForm.email.$error.required || userForm.email.$error.email)">
+            <span ng-show="userForm.email.$error.required">Email is required.</span>
+            <span ng-show="userForm.email.$error.email">Invalid email address.</span>
+        </div>
+
+        <!-- Additional Fields -->
+        <label>Phone:</label>
+        <input type="tel" name="phone" ng-model="formCtrl.user.phone" ng-pattern="/^\d{10}$/" required>
+        <div class="error" ng-show="userForm.phone.$dirty && (userForm.phone.$error.required || userForm.phone.$error.pattern)">
+            <span ng-show="userForm.phone.$error.required">Phone number is required.</span>
+            <span ng-show="userForm.phone.$error.pattern">Phone number must be 10 digits.</span>
+        </div>
+
+        <label>Address:</label>
+        <textarea name="address" ng-model="formCtrl.user.address" required></textarea>
+        <div class="error" ng-show="userForm.address.$dirty && userForm.address.$error.required">
+            Address is required.
+        </div>
+        <br>
+        <br>
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" ng-model="formCtrl.user.dob" required>
+        <div class="error" ng-show="userForm.dob.$dirty && userForm.dob.$error.required">
+            Date of Birth is required.
+        </div>
+
+        <label>Password:</label>
+        <input type="password" name="password" ng-model="formCtrl.user.password" ng-minlength="8" required>
+        <div class="error" ng-show="userForm.password.$dirty && (userForm.password.$error.required || userForm.password.$error.minlength)">
+            <span ng-show="userForm.password.$error.required">Password is required.</span>
+            <span ng-show="userForm.password.$error.minlength">Password must be at least 8 characters.</span>
+        </div>
+
+        <label>Confirm Password:</label>
+        <input type="password" name="confirmPassword" ng-model="formCtrl.user.confirmPassword" required
+       ng-pattern="formCtrl.user.password" ng-disabled="!formCtrl.user.password">
+        <div class="error" ng-show="userForm.confirmPassword.$dirty && (userForm.confirmPassword.$error.required || userForm.confirmPassword.$error.pattern)">
+            <span ng-show="userForm.confirmPassword.$error.required">Confirm Password is required.</span>
+            <span ng-show="userForm.confirmPassword.$error.pattern">Passwords do not match.</span>
+        </div>
+
+        <button type="submit" ng-disabled="userForm.$invalid">Submit</button>
+    </form>
+</div>
+
+<script>
+    angular.module('myApp', [])
+        .controller('FormController', function () {
+            var vm = this;
+            vm.submitForm = function () {
+                // Submit logic goes here
+                console.log('Form submitted:', vm.user);
+            };
+        });
+</script>
+
+</body>
+</html>
