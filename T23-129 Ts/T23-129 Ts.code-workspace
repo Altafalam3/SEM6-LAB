@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../login page/myapp"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "T23-129 Ts"
+	}
+}

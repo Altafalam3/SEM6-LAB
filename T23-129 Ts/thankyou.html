@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+</head>
+<body>
+    <h1>Thank You for Your Feedback!</h1>
+    <p>Here is the feedback received:</p>
+    {% for feedback in feedback_data %}
+        <p><strong>Name:</strong> {{ feedback['name'] }}</p>
+        <p><strong>Email:</strong> {{ feedback['email'] }}</p>
+        <p><strong>Feedback:</strong> {{ feedback['feedback'] }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>

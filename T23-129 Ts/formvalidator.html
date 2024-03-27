@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Data Validation in Angular JS</title>
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+	</script>
+    <link rel="stylesheet" href="validation.css">
+</head>
+
+<body ng-app="">
+	<h1>Contact Us</h1>
+	<form name="formname">
+		<label>Name:</label>
+		<input type="text"
+			ng-model="name"
+			name="name"
+			ng-minlength=3
+			ng-required="true"
+			ng-pattern="/^[\w\s]*$/"> 
+		<span ng-show="formname.name.$error.minlength"
+			style="color:red">
+			Minimum 3 characters required.
+		</span> 
+		<span ng-show="formname.name.$error.pattern"
+			style="color:red">Name can have only alphabets.
+		</span>
+		<br>
+		<label>Phone:</label>
+		<input type="tel"
+			name="phone"
+			ng-model="phone"
+			ng-pattern="/^[0-9]*$/"
+			ng-required="true"
+			ng-minlength=6
+			ng-maxlength=20> 
+		<span ng-show="formname.phone.$error.pattern"
+			style="color:red">Phone number can have only digits.
+		</span> 
+		<span ng-show="formname.phone.$error.minlength"
+			style="color:red">Minimum 10 characters required.
+		</span>
+		<span ng-show="formname.phone.$error.maxlength"
+			style="color:red">Minimum 10 characters required.
+		</span>
+		<br>
+		<label>Email:</label>
+		<input type="email"
+			name="email"
+			ng-model="email"
+			ng-required="true"
+			ng-pattern=
+"/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
+			<span ng-show="formname.email.$error.pattern"
+				style="color:red">Email has to be in format abc@gmail.com.
+		</span>
+	</form>
+</body>
+</html>

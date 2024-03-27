@@ -1,0 +1,19 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    font-size: 1.1rem;
+}
+form{
+    margin:auto;
+    border: 2px rgb(136, 136, 136) solid;
+    border-radius: 5px;
+    width: 700px;
+    padding: 20px;
+}
+input{
+    padding: 5px;
+    margin:10px;
+}
+label{
+    margin: 20px;
+}
