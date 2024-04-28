@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#feedbackForm").submit(function (event) {
+          // Prevent default form submission
+          event.preventDefault();
+          // Serialize form data
+          var formData = $(this).serialize();
+          // Submit form data via Ajax
+          $.ajax({
+            type: "POST",
+            url: "/submit_feedback",
+            data: formData,
+            success: function (response) {
+              $("#message").text("Submitted successfully.");
+              // Clear form fields
+              $("#feedbackForm")[0].reset();
+            },
+            error: function (xhr, status, error) {
+              $("#message").text(
+                "An error occurred while submitting feedback."
+              );
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Result Form</h1>
+    <form id="feedbackForm">
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required /><br />
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+      <label for="feedback">Enter your marks:</label><br />
+      <textarea id="feedback" name="feedback" rows="4" required></textarea><br>
+      <input type="submit" value="Submit" />
+    </form>
+    <div id="message"></div>
+  </body>
+</html>
